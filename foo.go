@@ -1,5 +1,6 @@
 package main
 
+import "encoding/json"
 import "fmt"
 
 type Trinity int
@@ -10,14 +11,29 @@ const (
 )
 
 type leader_card struct {
+  Id int
+  Name string
+  Chrisma int
+  Hp int
+  Ap int
+  Trin Trinity 
+}
+
+type support_card struct {
   id int
   name string
-  chrisma int
-  hp int
-  ap int
-  trinity Trinity
+  cost int
+  Trin Trinity
+}
+
+type hand struct {
+  leader leader_card
+  support [3]support_card
 }
 
 func main() {
-  fmt.Printf("hello world!\n")
+  card := leader_card{1, "Some Leader", 10, 10, 10, Rock}
+  js, err := json.Marshal(card)
+  fmt.Println(err)
+  fmt.Println(string(js))
 }
